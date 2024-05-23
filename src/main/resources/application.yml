@@ -13,3 +13,16 @@ spring:
       ddl-auto: update
       format_sql: true
       globally_quoted_identifiers: true
+  mail:
+    transport:
+      protocol: smtp
+    smtp:
+      writetimeout: 10000
+      connectiontimeout: 10000
+      timeout: 10000
+      auth: true
+      starttls:
+        enable: true
+        required: true
+    mime:
+      charset: UTF
