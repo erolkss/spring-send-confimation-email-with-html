@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(false);
         userRepository.save(user);
 
-        Confirmation confirmation = new Confirmation();
+        Confirmation confirmation = new Confirmation(user);
         confirmationRepository.save(confirmation);
 
 //        TODO Send email to user with token
