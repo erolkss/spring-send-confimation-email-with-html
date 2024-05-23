@@ -8,7 +8,7 @@ public interface EmailService {
 
     void sendMimeMessagesWithEmbeddedImages(String name, String to, String token);
 
-    void sendMimeMessagesWithEmbeddedFiles(String name, String to, String token);
+
 
     void sendHtmlEmail(String name, String to, String token);
 

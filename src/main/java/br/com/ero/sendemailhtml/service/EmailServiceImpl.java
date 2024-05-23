@@ -88,11 +88,6 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
-    @Override
-    @Async
-    public void sendMimeMessagesWithEmbeddedFiles(String name, String to, String token) {
-
-    }
 
     @Override
     @Async
