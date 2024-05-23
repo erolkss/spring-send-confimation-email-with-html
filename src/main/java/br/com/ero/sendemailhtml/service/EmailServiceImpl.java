@@ -66,7 +66,26 @@ public class EmailServiceImpl implements EmailService {
     @Override
     @Async
     public void sendMimeMessagesWithEmbeddedImages(String name, String to, String token) {
-
+        try {
+            MimeMessage message = getMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, UTF_8_ENCODING);
+            helper.setPriority(1);
+            helper.setSubject(NEW_USER_ACCOUNT_VERIFICATION);
+            helper.setFrom("${MAIL_USERNAME}");
+            helper.setTo(to);
+            helper.setText(EmailUtils.getEmailMessage(name, HOST, token));
+            // Add Attachments
+            FileSystemResource leopard = new FileSystemResource(new File(System.getProperty("user.home") + "/Downloads/images/leopard.jpg"));
+            FileSystemResource adventure = new FileSystemResource(new File(System.getProperty("user.home") + "/Downloads/images/adventure.jpg"));
+            FileSystemResource wordDocument = new FileSystemResource(new File(System.getProperty("user.home") + "/Downloads/images/Word.docx"));
+            helper.addInline(getContentId(leopard.getFilename()), leopard);
+            helper.addInline(getContentId(adventure.getFilename()), adventure);
+            helper.addInline(getContentId(wordDocument.getFilename()), wordDocument);
+            javaMailSender.send(message);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            throw new RuntimeException(exception.getMessage());
+        }
     }
 
     @Override
@@ -91,4 +110,7 @@ public class EmailServiceImpl implements EmailService {
         return javaMailSender.createMimeMessage();
     }
 
+    private String getContentId(String filename) {
+        return "<" + filename + ">";
+    }
 }
