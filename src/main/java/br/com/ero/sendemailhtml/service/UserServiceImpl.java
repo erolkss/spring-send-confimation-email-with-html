@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ConfirmationRepository confirmationRepository;
+    private final EmailService emailService;
 
     @Override
     public User saveUser(User user) {
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
         confirmationRepository.save(confirmation);
 
 //        TODO Send email to user with token
+        emailService.sendSimpleEmailMessage(user.getName(), user.getEmail(), confirmation.getToken());
 
         return user;
     }
