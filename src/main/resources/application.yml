@@ -14,15 +14,22 @@ spring:
       format_sql: true
       globally_quoted_identifiers: true
   mail:
-    transport:
-      protocol: smtp
-    smtp:
-      writetimeout: 10000
-      connectiontimeout: 10000
-      timeout: 10000
-      auth: true
-      starttls:
-        enable: true
-        required: true
-    mime:
-      charset: UTF
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          writetimeout: 10000
+          connectiontimeout: 10000
+          timeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        mime:
+          charset: UTF
